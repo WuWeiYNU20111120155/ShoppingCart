@@ -8,7 +8,7 @@ import com.wuwei.shopping_cart.cart.model.UpdateCartRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@RestController
 public class CartController {
 
     @PostMapping("/carts")

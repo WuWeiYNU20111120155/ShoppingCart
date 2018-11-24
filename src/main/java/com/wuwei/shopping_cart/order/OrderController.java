@@ -7,7 +7,7 @@ import com.wuwei.shopping_cart.product.model.CreateProductRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@RestController
 public class OrderController {
 
     @GetMapping("/orders")

@@ -6,13 +6,13 @@ public class CreateProductRequest {
 
     private String name;
     private String description;
-    private long price;
+    private double price;
 
     public CreateProductRequest(){
 
      }
 
-    public CreateProductRequest( String name, String description, long price) {
+    public CreateProductRequest( String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -34,11 +34,11 @@ public class CreateProductRequest {
         this.description = description;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

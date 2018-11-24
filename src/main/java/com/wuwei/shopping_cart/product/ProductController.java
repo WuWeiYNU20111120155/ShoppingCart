@@ -5,25 +5,36 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
 public class ProductController {
 
+    private ProductDao productDao;
+
+    public  ProductController(ProductDao productDao){
+        this.productDao = productDao;
+    }
     /*
     * List products
     */
     @GetMapping("/products")
     public ResponseEntity<ListProductResponse> listProducts(){
         //取出数据库中的products然后转化为product的list对象放到ListProductResponse(List<product>)
-        return new ResponseEntity<>(new ListProductResponse(), HttpStatus.OK);
+        List<Product> products = productDao.listProducts();
+        return new ResponseEntity<>(new ListProductResponse(products), HttpStatus.OK);
     }
 
     /*
     * Get product
     */
     @GetMapping("/products/{productId}")
-    public ResponseEntity<GetProductResponse> getProduct(@PathVariable String productId ){
+    public ResponseEntity<GetProductResponse> getProduct(@PathVariable int productId ){
 
         //实现 在数据库中取出该product然后转化为product对象放到GetProductResponse(product)
-        return new ResponseEntity<>(new GetProductResponse(), HttpStatus.OK);
+        Product product = productDao.getProductById(productId);
+
+        return new ResponseEntity<>(new GetProductResponse(product), HttpStatus.OK);
     }
 
     /*
@@ -32,15 +43,17 @@ public class ProductController {
     @PostMapping("/products")
     public ResponseEntity<CreateProductResponse> createProduct(@RequestBody CreateProductRequest createProductRequest){
         //实现校验等代码，
-        return new ResponseEntity<>(new CreateProductResponse(), HttpStatus.CREATED);
+        Product product = productDao.createProduct(createProductRequest);
+        return new ResponseEntity<>(new CreateProductResponse(product), HttpStatus.CREATED);
     }
     /*
     * 更新商品
     */
     @PutMapping("/products/{productId}")
-    public ResponseEntity<UpdateProductResponse> updateProduct(@PathVariable String productId,@RequestBody UpdateProductRequest updateProductRequest){
-
-        return new ResponseEntity<>(new UpdateProductResponse(), HttpStatus.OK);
+    public ResponseEntity<UpdateProductResponse> updateProduct(@PathVariable int productId,@RequestBody UpdateProductRequest updateProductRequest){
+        //实现代码
+        Product product = productDao.updateProduct(productId,updateProductRequest);
+        return new ResponseEntity<>(new UpdateProductResponse(product), HttpStatus.OK);
     }
 
 

@@ -1,10 +1,10 @@
 package com.wuwei.shopping_cart.product;
+import com.wuwei.shopping_cart.product.controller.ProductController;
+import com.wuwei.shopping_cart.product.controller.model.*;
 import com.wuwei.shopping_cart.product.model.*;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.sql.Statement;
 
 import static org.junit.Assert.assertEquals;
 

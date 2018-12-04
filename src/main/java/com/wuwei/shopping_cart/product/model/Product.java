@@ -1,18 +1,38 @@
 package com.wuwei.shopping_cart.product.model;
 
 
+import javax.persistence.*;
+
+/*
+    数据和对象的mapping
+
+ */
+@Entity
+@Table(name="product")
 public class Product {
 
+    /*
+    Product的属性在数据库表中字段的映射
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String description;
-    private double price;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price")
+    private double price;
+    /*
+        默认构造方法
+     */
     public Product() {
     }
 
-    public Product(int id, String name, String description, double price) {
-        this.id = id;
+    public Product( String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;

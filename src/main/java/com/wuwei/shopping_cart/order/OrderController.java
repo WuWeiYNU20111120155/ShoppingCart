@@ -3,7 +3,7 @@ package com.wuwei.shopping_cart.order;
 import com.wuwei.shopping_cart.order.model.CreateOrderResponse;
 import com.wuwei.shopping_cart.order.model.GetOrderResponse;
 import com.wuwei.shopping_cart.order.model.ListOrderResponse;
-import com.wuwei.shopping_cart.product.model.CreateProductRequest;
+import com.wuwei.shopping_cart.product.controller.model.CreateProductRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

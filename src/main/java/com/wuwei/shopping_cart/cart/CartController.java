@@ -1,44 +1,70 @@
 package com.wuwei.shopping_cart.cart;
 
-import com.sun.org.apache.regexp.internal.RE;
-import com.wuwei.shopping_cart.cart.model.GetCartResponse;
-import com.wuwei.shopping_cart.cart.model.ListCartResponse;
-import com.wuwei.shopping_cart.cart.model.UpdateCartReponse;
-import com.wuwei.shopping_cart.cart.model.UpdateCartRequest;
+import com.wuwei.shopping_cart.cart.model.*;
+import com.wuwei.shopping_cart.product.model.Product;
+import com.wuwei.shopping_cart.product.model.ProductDao;
+import com.wuwei.shopping_cart.user.model.User;
+import com.wuwei.shopping_cart.user.model.UserDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 public class CartController {
 
+    private ProductDao productDao;
+    private UserDao userDao;
+    private CartItemDao cartItemDao;
+
+    public CartController(ProductDao productDao, UserDao userDao, CartItemDao cartItemDao) {
+        this.productDao = productDao;
+        this.userDao = userDao;
+        this.cartItemDao = cartItemDao;
+    }
+
     @PostMapping("/carts")
-    public ResponseEntity<UpdateCartReponse> createCart(@RequestBody UpdateCartRequest updateCartRequest){
+    public ResponseEntity<UpdateCartItemReponse> createCart(@RequestBody CreateCarItemRequest createCarItemRequest){
         //实现
-        return new ResponseEntity<>(new UpdateCartReponse(), HttpStatus.CREATED);
+        int quantity = createCarItemRequest.getQuantity();
+        Product product = productDao.findById(createCarItemRequest.getProductId());
+        User user =userDao.getById(createCarItemRequest.getUserId());
+        CartItem item = new CartItem(user,product,quantity);
+        cartItemDao.save(item);
+        return new ResponseEntity<>(new UpdateCartItemReponse(item), HttpStatus.CREATED);
     }
 
     @PutMapping("/carts/{cartId}")
-    public ResponseEntity<UpdateCartReponse> updateCart(@PathVariable String cartId, @RequestBody UpdateCartRequest updateCartRequest){
+    public ResponseEntity<UpdateCartItemReponse> updateCart(@PathVariable int cartId, @RequestBody UpdateCartItemRequest updateCartItemRequest){
         //实现
-        return new ResponseEntity<>(new UpdateCartReponse(), HttpStatus.OK);
+        CartItem item = cartItemDao.findById(cartId);
+        item.setQuantity(updateCartItemRequest.getQuantity());
+        item = cartItemDao.save(item);
+        return new ResponseEntity<>(new UpdateCartItemReponse(item), HttpStatus.OK);
     }
 
     @DeleteMapping("carts/{cartId}")
-    public void deleteCart(@PathVariable String cartId)
+    public void deleteCartItem(@PathVariable int cartId)
     {
         //代码实现
+        CartItem item = cartItemDao.findById(cartId);
+        cartItemDao.delete(item);
+
     }
 
     @GetMapping("/carts/{cartId}")
-    public ResponseEntity<GetCartResponse> getCart(@PathVariable String cartId){
-        //实现
-        return new ResponseEntity<>(new GetCartResponse(), HttpStatus.OK);
+    public ResponseEntity<GetCartItemResponse> getCart(@PathVariable int cartId){
+
+        CartItem item = cartItemDao.findById(cartId);
+        return new ResponseEntity<>(new GetCartItemResponse(item), HttpStatus.OK);
     }
 
     @GetMapping("/carts")
-    public ResponseEntity<ListCartResponse> listCarts(){
+    public ResponseEntity<ListCartItemResponse> listCarts(){
         //实现
-        return new ResponseEntity<>(new ListCartResponse (), HttpStatus.OK);
+        List<CartItem> items = cartItemDao.findAll();
+        return new ResponseEntity<>(new ListCartItemResponse(items), HttpStatus.OK);
     }
 
 }

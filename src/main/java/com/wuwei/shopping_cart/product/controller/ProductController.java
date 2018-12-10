@@ -2,7 +2,7 @@ package com.wuwei.shopping_cart.product.controller;
 
 import com.wuwei.shopping_cart.product.controller.model.*;
 import com.wuwei.shopping_cart.product.model.*;
-import org.hibernate.validator.internal.util.privilegedactions.NewProxyInstance;
+//import org.hibernate.validator.internal.util.privilegedactions.NewProxyInstance;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

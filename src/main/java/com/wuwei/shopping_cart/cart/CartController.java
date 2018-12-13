@@ -29,7 +29,7 @@ public class CartController {
         //实现
         int quantity = createCarItemRequest.getQuantity();
         Product product = productDao.findById(createCarItemRequest.getProductId());
-        User user =userDao.getById(createCarItemRequest.getUserId());
+        User user =userDao.findById(createCarItemRequest.getUserId());
         CartItem item = new CartItem(user,product,quantity);
         cartItemDao.save(item);
         return new ResponseEntity<>(new UpdateCartItemReponse(item), HttpStatus.CREATED);

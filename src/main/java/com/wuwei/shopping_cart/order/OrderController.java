@@ -57,7 +57,7 @@ public class OrderController {
     @PostMapping("/orders")
     public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
 
-        User user = userDao.getById(createOrderRequest.getUserId());
+        User user = userDao.findById(createOrderRequest.getUserId());
         Product product = productDao.findById(createOrderRequest.getProductId());
         Order order = new Order(user, product, createOrderRequest.getQuantity(),
                 createOrderRequest.getStatus(), createOrderRequest.getAddress());

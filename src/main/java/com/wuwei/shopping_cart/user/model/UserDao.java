@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface UserDao extends CrudRepository<User,Integer> {
-    User getById(int id);
+    User findById(int id);
     User getByName(String name);
     List<User> findAll();
     User save(User user);

@@ -21,6 +21,8 @@ com\wuwei\shopping_cart\order\model\ListOrderResponse.class
 com\wuwei\shopping_cart\order\model\CreateOrderResponse.class
 com\wuwei\shopping_cart\order\model\OrderDao.class
 com\wuwei\shopping_cart\cart\model\GetCartItemResponse.class
+com\wuwei\shopping_cart\user\model\GetUserResponse.class
+com\wuwei\shopping_cart\config\AppConfig.class
 com\wuwei\shopping_cart\cart\model\UpdateCartItemRequest.class
 com\wuwei\shopping_cart\user\model\CreateUserResponse.class
 com\wuwei\shopping_cart\cart\model\CreateCarItemRequest.class

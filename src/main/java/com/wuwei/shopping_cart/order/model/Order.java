@@ -6,7 +6,7 @@ import com.wuwei.shopping_cart.user.model.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name="order")
+@Table(name = "`order`")
 public class Order {
 
     @Id

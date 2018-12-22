@@ -1,7 +1,8 @@
 package com.wuwei.shopping_cart.product;
-import com.wuwei.shopping_cart.product.controller.ProductController;
-import com.wuwei.shopping_cart.product.controller.model.*;
-import com.wuwei.shopping_cart.product.model.*;
+import com.wuwei.shopping_cart.web.product.controller.ProductController;
+
+import com.wuwei.shopping_cart.web.product.model.ProductDao;
+import com.wuwei.shopping_cart.web.product.view.*;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
